@@ -7,7 +7,7 @@ import time
 
 
 class MuseControlServer(ServerThread):
-  def __init__(self, port = 5001, mean = 850, deviation = 80, sleep_timer = 150):
+  def __init__(self, port = 5002, mean = 850, deviation = 80, sleep_timer = 150):
     ServerThread.__init__(self, port)
     self.mean = mean
     self.deviation = deviation
@@ -57,22 +57,23 @@ class MuseControlServer(ServerThread):
 
 
 if __name__ == "__main__":
-  try:
-    server = MuseServer()
-  except ServerError, err:
-    print(str(err))
-    sys.exit()
+  calib_server = MuseCalibrationServer()
+  calib_server.start()
+  calib_server.calibrate()
+  calib_server.stop()
+  print("Calibrated to {}, {}".format(calib_server.mean, calib_server.deviation))
 
+  control_server = MuseControlServer(mean = calib_server.mean, deviation = calib_server.deviation)
   # gd = GridDisplay()
   mg = MazeGUI()
-  server.start()
+  control_server.start()
   while True:
-    # gd.update(server.x, server.y)
-    mg.get_muse_input(server.x, server.y, server.exit)
+    # gd.update(control_server.x, control_server.y)
+    mg.get_muse_input(control_server.x, control_server.y, control_server.exit)
     # gd.display()
     mg.display()
-    if server.exit:
+    if control_server.exit:
       break
     time.sleep(0.25)
-  server.stop()
+  control_server.stop()
   sys.exit()
