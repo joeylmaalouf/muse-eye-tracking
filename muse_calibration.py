@@ -40,7 +40,7 @@ class MuseCalibrationServer(ServerThread):
     print("Please look right briefly and return to center.")
     time.sleep(2)
     if self.state == self.STATES["ERROR"]:
-      print("Unusual mean value detected.\nPlease make sure the Muse headband is on properly and re-run this program.")
+      print("Unusual deviation value detected.\nPlease make sure the Muse headband is on properly and re-run this program.")
       self.stop()
       sys.exit()
     else:
