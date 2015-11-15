@@ -1,8 +1,9 @@
 from grid_display import GridDisplay
+from Maze import MazeGui
 from liblo import *
 import sys
 import time
-
+sys.exit()
 
 class MuseServer(ServerThread):
   def __init__(self, port = 5001, mean = 850, deviation = 85, sleep_timer = 150):

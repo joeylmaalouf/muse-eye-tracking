@@ -3,6 +3,8 @@ from pygame.locals import *
 import WilsonsAlgorithm
 from time import sleep
 
+FILEPATH = "/".join(__file__.split("/")[:-1])
+
 width = 5
 height = 5
 scale = 75
@@ -28,7 +30,7 @@ def checkExit(events):
 def loadTiles():
 	tiles = []
 	for i in range(16):
-		tile = pygame.transform.scale(pygame.image.load("./maze-tiles/" + str(i) + ".png"), (scale,scale))
+		tile = pygame.transform.scale(pygame.image.load(FILEPATH+"/maze-tiles/" + str(i) + ".png"), (scale,scale))
 		tiles.append(tile)
 	return tiles
 
@@ -36,7 +38,7 @@ def loadLines():
 	lines = [1, 2, 4, 5, 8, 9, 3, 6, 10, 12]
 	linepics = {}
 	for i in lines:
-		linepics[i] = pygame.transform.scale(pygame.image.load("./maze-tiles/line" + str(i) + ".png"), (scale,scale))
+		linepics[i] = pygame.transform.scale(pygame.image.load(FILEPATH+"/maze-tiles/line" + str(i) + ".png"), (scale,scale))
 	return linepics
 
 def mainLoop():
@@ -57,7 +59,7 @@ def mainLoop():
 		print x, y
 		if x == width-1 and y == height-1:
 			print "exiting"
-			wintext = pygame.image.load("./maze-tiles/wintext.png")
+			wintext = pygame.image.load(FILEPATH+"/maze-tiles/wintext.png")
 			print 374.0/(width*scale)
 			wintext = pygame.transform.scale(wintext, (width*scale, int(height*scale*((width*scale)/374.0))))
 			screen.blit(wintext, (0,(height-int(height*((width*scale)/374.0)))/2))
@@ -74,7 +76,6 @@ def gameOver():
     display.blit(endText, (470, 100))
     pygame.display.flip()
     clock.tick(60)
-
 
 def display_maze(maze, tiles):
 	for i in range(len(maze)):
@@ -120,7 +121,7 @@ def check_input(x, y, move, maze):
 
 def display_path(path, lines):
 	x, y = 0, 0
-	ball = pygame.transform.scale(pygame.image.load("./maze-tiles/current_pos.png"), (scale,scale))
+	ball = pygame.transform.scale(pygame.image.load(FILEPATH+"/maze-tiles/current_pos.png"), (scale,scale))
 	for i, move in enumerate(path):
 		if i == 0:
 			screen.blit(lines[move], (0,0))
@@ -137,9 +138,10 @@ def display_path(path, lines):
 		screen.blit(lines[OPPOSITE[path[len(path)-1]]], (x*scale, y*scale))
 	screen.blit(ball, (x*scale,y*scale))
 
-
-	ball = pygame.transform.scale(pygame.image.load("./maze-tiles/Ball.png"), (scale,scale))
+	ball = pygame.transform.scale(pygame.image.load(FILEPATH+"/maze-tiles/Ball.png"), (scale,scale))
 	screen.blit(ball, (0,0))
 	screen.blit(ball, (width*scale-scale, height*scale-scale))
 
-mainLoop()
+
+if __name__ == '__main__':
+	mainLoop()
