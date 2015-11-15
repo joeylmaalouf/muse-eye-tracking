@@ -1,11 +1,12 @@
-from grid_display import GridDisplay
+# from grid_display import GridDisplay
+from muse_calibration import MuseCalibrationServer
 from Maze.MazeGui import MazeGUI
 from liblo import *
 import sys
 import time
 
 
-class MuseServer(ServerThread):
+class MuseControlServer(ServerThread):
   def __init__(self, port = 5001, mean = 850, deviation = 80, sleep_timer = 150):
     ServerThread.__init__(self, port)
     self.mean = mean
