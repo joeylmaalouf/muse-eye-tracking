@@ -1,5 +1,5 @@
 from grid_display import GridDisplay
-from Maze import MazeGui
+from Maze.MazeGui import MazeGUI
 from liblo import *
 import sys
 import time
@@ -62,13 +62,16 @@ if __name__ == "__main__":
     print(str(err))
     sys.exit()
 
-  gd = GridDisplay()
+  # gd = GridDisplay()
+  mg = MazeGUI()
   server.start()
   while True:
-    gd.update(server.x, server.y)
-    gd.display()
+    # gd.update(server.x, server.y)
+    mg.get_muse_input(server.x, server.y, server.exit)
+    # gd.display()
+    mg.display()
     if server.exit:
       break
-    time.sleep(0.05)
+    time.sleep(0.5)
   server.stop()
   sys.exit()
