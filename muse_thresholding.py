@@ -6,7 +6,7 @@ import time
 
 
 class MuseServer(ServerThread):
-  def __init__(self, port = 5001, mean = 850, deviation = 85, sleep_timer = 150):
+  def __init__(self, port = 5001, mean = 850, deviation = 80, sleep_timer = 150):
     ServerThread.__init__(self, port)
     self.mean = mean
     self.deviation = deviation
@@ -72,6 +72,6 @@ if __name__ == "__main__":
     mg.display()
     if server.exit:
       break
-    time.sleep(0.5)
+    time.sleep(0.25)
   server.stop()
   sys.exit()
