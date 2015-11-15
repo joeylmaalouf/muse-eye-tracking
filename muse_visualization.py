@@ -6,7 +6,6 @@ import numpy as np
 
 
 class MuseServer(ServerThread):
-  #listen for messages on port 5001
   def __init__(self):
     ServerThread.__init__(self, 5001)
     self.n_events = 0
@@ -15,8 +14,7 @@ class MuseServer(ServerThread):
     self.r_forehead = []
     self.r_ear = []
 
-  #receive EEG data
-  @make_method('/muse/eeg', 'ffff')
+  @make_method("/muse/eeg", "ffff")
   def eeg_callback(self, path, args):
     (l_ear, l_forehead, r_forehead, r_ear) = args
     self.n_events += 1
@@ -24,17 +22,6 @@ class MuseServer(ServerThread):
     self.l_forehead.append(l_forehead)
     self.r_forehead.append(r_forehead)
     self.r_ear.append(r_ear)
-
-  #handle unexpected messages
-  @make_method(None, None)
-  def err_callback(self, path, args, types, src):
-    pass
-    #print "Unknown message \
-    #\n\t Source: '%s' \
-    #\n\t Address: '%s' \
-    #\n\t Types: '%s ' \
-    #\n\t Payload: '%s'" \
-    #% (src.url, path, types, args)
 
 
 def smooth(y, box_pts):
