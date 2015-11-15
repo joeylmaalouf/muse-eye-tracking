@@ -4,7 +4,7 @@ import sys
 
 
 class GridDisplay(object):
-  def __init__(self, size = 640):
+  def __init__(self, size = 720):
     super(GridDisplay, self).__init__()
     pygame.init()
     self.size = size
@@ -13,7 +13,7 @@ class GridDisplay(object):
 
   def update(self, x, y):
     self.grid[np.nonzero(self.grid)] = False # reset grid
-    self.grid[x+1, y+1] = True # translate inputs of -1, 0, 1 to 0, 1, 2 for indices
+    self.grid[y+1, x+1] = True # translate inputs of -1, 0, 1 to 0, 1, 2 for indices
 
   def display(self):
     for i, row in enumerate(self.grid):
@@ -33,10 +33,10 @@ def process_keys():
     elif event.type == pygame.KEYDOWN:
       if event.key == pygame.K_ESCAPE:
         sys.exit()
-      elif event.key == pygame.K_w: x = -1
-      elif event.key == pygame.K_s: x =  1
-      elif event.key == pygame.K_a: y = -1
-      elif event.key == pygame.K_d: y =  1
+      elif event.key == pygame.K_w: y = -1
+      elif event.key == pygame.K_s: y =  1
+      elif event.key == pygame.K_a: x = -1
+      elif event.key == pygame.K_d: x =  1
   return x, y
 
 
