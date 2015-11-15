@@ -4,7 +4,7 @@ import sys
 
 
 class GridDisplay(object):
-  def __init__(self, size = 720):
+  def __init__(self, size = 640):
     super(GridDisplay, self).__init__()
     pygame.init()
     self.size = size

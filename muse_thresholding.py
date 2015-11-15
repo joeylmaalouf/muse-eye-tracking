@@ -11,6 +11,7 @@ class MuseServer(ServerThread):
     self.sleep_timer = sleep_timer
     self.sleep_counter = 0
     self.sleeping = False
+    self.prev_re = mean
 
   @make_method("/muse/eeg", "ffff")
   def eeg_callback(self, path, args):
@@ -22,8 +23,12 @@ class MuseServer(ServerThread):
 
     if not self.sleeping:
       if r_ear < (self.mean - self.deviation):
-        print("Up")
-        self.sleeping = True
+        if r_ear > self.prev_re:
+          if r_ear < (self.mean - 2.5 * self.deviation):
+            print("Blink")
+          else:
+            print("Up")
+          self.sleeping = True
       elif r_ear > (self.mean + self.deviation):
         print("Down")
         self.sleeping = True
@@ -35,6 +40,7 @@ class MuseServer(ServerThread):
         self.sleeping = True
     else:
       self.sleep_counter += 1
+    self.prev_re = r_ear
 
 
 if __name__ == "__main__":
