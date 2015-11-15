@@ -10,3 +10,8 @@ Analyzing Muse headband sensor data to track eye motion. Done for the Codestella
   * `cd ~/Downloads/`
   * `chmod +x musesdk-3.4.1-linux-installer.run`
   * `./musesdk-3.4.1-linux-installer.run`
+
+### Usage
+* `git clone https://github.com/joeylmaalouf/muse-eye-tracking.git`
+* `cd muse-eye-tracking`
+* `python muse_thresholding.py`
