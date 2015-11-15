@@ -30,31 +30,25 @@ class MuseServer(ServerThread):
       if r_ear < (self.mean - self.deviation):
         if r_ear > self.prev_re:
           if r_ear < (self.mean - 2.75 * self.deviation):
-            print "Blink", r_ear, self.mean - 2.75 * self.deviation
-            self.exit = True
+            self.exit = True # blink
           else:
-            print "Up", r_ear, self.mean - self.deviation
-            self.y = -1
+            self.y = -1 # up
           self.sleeping = True
       elif r_ear > (self.mean + self.deviation):
-        print "Down", r_ear, self.mean + self.deviation
-        self.y = 1
+        self.y = 1 # down
         self.sleeping = True
       else:
         y_change = False
       if l_forehead < (self.mean - self.deviation):
-        print "Right", l_forehead, self.mean - self.deviation
-        self.x = 1
+        self.x = 1 # right
         self.sleeping = True
       elif l_forehead > (self.mean + self.deviation):
-        print "Left", l_forehead, self.mean + self.deviation
-        self.x = -1
+        self.x = -1 # left
         self.sleeping = True
       else:
         x_change = False
       if not (x_change or y_change):
-        print "Center"
-        self.x = self.y = 0
+        self.x = self.y = 0 # center
     else:
       self.sleep_counter += 1
     self.prev_re = r_ear
