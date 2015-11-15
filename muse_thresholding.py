@@ -5,7 +5,7 @@ import time
 
 
 class MuseServer(ServerThread):
-  def __init__(self, port = 5001, mean = 850, deviation = 90, sleep_timer = 150):
+  def __init__(self, port = 5001, mean = 850, deviation = 85, sleep_timer = 150):
     ServerThread.__init__(self, port)
     self.mean = mean
     self.deviation = deviation
