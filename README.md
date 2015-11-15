@@ -10,6 +10,9 @@ Analyzing Muse headband sensor data to track eye motion. Done for the Codestella
   * `cd ~/Downloads/`
   * `chmod +x musesdk-3.4.1-linux-installer.run`
   * `./musesdk-3.4.1-linux-installer.run`
+* [Muse headband](http://www.choosemuse.com/)
+  * connect via Bluetooth
+  * `muse-io --osc osc.udp://localhost:5001,osc.udp://localhost:5002`
 
 ### Usage
 * `git clone https://github.com/joeylmaalouf/muse-eye-tracking.git`
