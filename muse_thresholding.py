@@ -1,3 +1,4 @@
+#Created by Joey Maalouf pair programming with Gabriel Butterick 
 # from grid_display import GridDisplay
 from muse_calibration import MuseCalibrationServer
 from Maze.MazeGui import MazeGUI
