@@ -1,9 +1,7 @@
 # muse-eye-tracking
 Analyzing Muse headband sensor data to track eye motion. Comes with demo software (a basic joystick simulator, as well as a more advanced maze game to navigate) in order to show how easy it is to interact with your computer using nothing but your eyes, the Muse headband, and our software.
 
-Done for the Codestellation Nov. 14-15 hackathon.
-
-We won! Codestellation listed its overall category winners, of which we were one, but we know we also came in first overall, since we recieved the bonus prizes!
+Done for the Codestellation Nov. 14-15 hackathon. We won the award for best hardware hack!
 
 ### Requirements
 * [pyliblo module](http://das.nasophon.de/pyliblo/)
