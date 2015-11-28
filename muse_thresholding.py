@@ -1,4 +1,5 @@
 #Created by Joey Maalouf pair programming with Gabriel Butterick 
+#Takes in data from the Muse headset and compares it to thresholds determined by the callibration code.
 # from grid_display import GridDisplay
 from muse_calibration import MuseCalibrationServer
 from Maze.MazeGui import MazeGUI
@@ -8,6 +9,7 @@ import time
 
 
 class MuseControlServer(ServerThread):
+  #Data gathering setup
   def __init__(self, port = 5002, mean = 850, deviation = 80, sleep_timer = 150):
     ServerThread.__init__(self, port)
     self.mean = mean
@@ -21,14 +23,15 @@ class MuseControlServer(ServerThread):
     self.exit = False
 
   @make_method("/muse/eeg", "ffff")
+  #Sets up the particular sensors we use
   def eeg_callback(self, path, args):
     (l_ear, l_forehead, r_forehead, r_ear) = args
     x_change = y_change = True
-
+#Resets sleep mode to be inactive. Sleep mode is used to keep the program from reacting too quickly to inputs
     if self.sleep_counter >= self.sleep_timer:
       self.sleep_counter = 0
       self.sleeping = False
-
+#Determines the direction the user is looking
     if not self.sleeping:
       if r_ear < (self.mean - self.deviation):
         if r_ear > self.prev_re:
@@ -66,6 +69,7 @@ if __name__ == "__main__":
 
   control_server = MuseControlServer(mean = calib_server.mean, deviation = calib_server.deviation)
   # gd = GridDisplay()
+ #Initiates the test maze
   mg = MazeGUI()
   control_server.start()
   while True:
